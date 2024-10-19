@@ -11,7 +11,7 @@ import os
 load_dotenv()
 
 # Inicializar o app Flask
-app = Flask(_name_)
+app = Flask(__name__)
 CORS(app)
 
 # Inicializando o cliente Groq com a chave de API
@@ -59,7 +59,7 @@ def conversar():
         # Prepara as mensagens para a API do Groq
         response = client.chat.completions.create(
             messages=[{"role": "user", "content": user_input}],
-            model="gemma2-9b-it"  # Use o modelo correto da Groq
+            model="gemma2-9b-it"
         )
 
         resposta_ia = response.choices[0].message.content
@@ -68,5 +68,7 @@ def conversar():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-if _name_ == '_main_':
-    app.run(debug=True)
+# Executar o app
+if __name__ == '__main__':
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
