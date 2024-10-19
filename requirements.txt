@@ -1,7 +1,8 @@
 Flask
 requests
 flask-cors
-groq-langchain
 python-dotenv
 SpeechRecognition
 pydub
+groq
+langchain
